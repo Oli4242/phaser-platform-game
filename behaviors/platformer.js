@@ -43,7 +43,10 @@ var Platformer = {
             object.body.velocity.x = 0;
         }
 
-        if (cursor.up.isDown && object.body.touching.down) {
+        // Only object.body.touching.down wont work with Phaser's Tilemap
+        // We need to use object.body.blocked.down too
+        // if (cursor.up.isDown && object.body.touching.down) {
+        if (cursor.up.isDown && (object.body.touching.down || object.body.blocked.down)) {
             object.body.velocity.y = -options.jumpStrength;
         }
     }
